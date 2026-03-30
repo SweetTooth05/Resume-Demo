@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Resolve admin.css / admin.js when the page URL is /admin (no trailing slash) -->
+  <base href="/admin/" />
+  <title>FinanceApp Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       STATE 1: SETUP
+  ============================================================ -->
+  <div id="state-setup" class="state hidden">
+    <div class="setup-wrapper">
+      <div class="setup-card">
+        <div class="setup-header">
+          <div class="brand-row">
+            <i class="fa-solid fa-shield-halved brand-icon"></i>
+            <span class="brand-name">FinanceApp Admin</span>
+          </div>
+          <h1 class="setup-title">Admin Setup</h1>
+          <p class="setup-subtitle">
+            In <strong>Microsoft Authenticator</strong>, tap <strong>Add account</strong> → <strong>Other</strong> (work or school QR),
+            then scan this code. You can use any TOTP app that supports QR setup.
+          </p>
+        </div>
+
+        <div class="qr-container" id="qr-container">
+          <div class="qr-loading" id="qr-loading">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            <span>Loading QR code…</span>
+          </div>
+          <img id="qr-image" class="qr-image hidden" alt="TOTP QR Code" />
+          <div class="qr-error hidden" id="qr-error">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Failed to load QR code</span>
+          </div>
+        </div>
+
+        <form id="setup-form" class="auth-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="setup-password">Password</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input
+                type="password"
+                id="setup-password"
+                class="form-input"
+                placeholder="Create a strong password"
+                autocomplete="new-password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="setup-confirm-password">Confirm Password</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input
+                type="password"
+                id="setup-confirm-password"
+                class="form-input"
+                placeholder="Confirm your password"
+                autocomplete="new-password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="setup-totp">Microsoft Authenticator code</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-key input-icon"></i>
+              <input
+                type="text"
+                id="setup-totp"
+                class="form-input totp-input"
+                placeholder="000000"
+                maxlength="6"
+                inputmode="numeric"
+                pattern="[0-9]{6}"
+                autocomplete="one-time-code"
+                required
+              />
+            </div>
+          </div>
+
+          <div id="setup-error" class="form-error hidden">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="setup-error-text"></span>
+          </div>
+
+          <button type="submit" id="setup-submit" class="btn btn-primary btn-full">
+            <span class="btn-text">Complete Setup</span>
+            <i class="fa-solid fa-circle-notch fa-spin btn-spinner hidden"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       STATE 2: LOGIN
+  ============================================================ -->
+  <div id="state-login" class="state hidden">
+    <div class="login-wrapper">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="brand-row">
+            <i class="fa-solid fa-shield-halved brand-icon"></i>
+            <span class="brand-name">FinanceApp Admin</span>
+          </div>
+          <p class="login-subtitle">Sign in to your admin account</p>
+        </div>
+
+        <form id="login-form" class="auth-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-envelope input-icon"></i>
+              <input
+                type="email"
+                id="login-email"
+                class="form-input"
+                value="kevilyfe@hotmail.com"
+                readonly
+                tabindex="-1"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input
+                type="password"
+                id="login-password"
+                class="form-input"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-totp">Microsoft Authenticator code</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-key input-icon"></i>
+              <input
+                type="text"
+                id="login-totp"
+                class="form-input totp-input"
+                placeholder="000000"
+                maxlength="6"
+                inputmode="numeric"
+                pattern="[0-9]{6}"
+                autocomplete="one-time-code"
+                required
+              />
+            </div>
+            <p class="form-hint">Open Microsoft Authenticator and enter the 6-digit code for <strong>FinanceApp Admin</strong>.</p>
+          </div>
+
+          <div id="login-error" class="form-error hidden">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="login-error-text"></span>
+          </div>
+
+          <button type="submit" id="login-submit" class="btn btn-primary btn-full">
+            <span class="btn-text">Sign In</span>
+            <i class="fa-solid fa-circle-notch fa-spin btn-spinner hidden"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       STATE 3: DASHBOARD
+  ============================================================ -->
+  <div id="state-dashboard" class="state hidden">
+
+    <!-- Header -->
+    <header class="dash-header">
+      <div class="dash-header-inner">
+        <div class="brand-row">
+          <i class="fa-solid fa-shield-halved brand-icon"></i>
+          <span class="brand-name">FinanceApp Admin</span>
+        </div>
+        <button id="signout-btn" class="btn btn-ghost btn-sm">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Sign Out
+        </button>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="dash-main">
+      <div class="dash-content">
+
+        <!-- Page title -->
+        <div class="dash-page-header">
+          <h1 class="dash-page-title">Dashboard</h1>
+          <p class="dash-page-subtitle">Overview of your FinanceApp data and system status</p>
+        </div>
+
+        <!-- ---- SECTION 1: METRICS ---- -->
+        <section class="dash-section">
+          <div class="section-header">
+            <h2 class="section-title">Metrics</h2>
+            <button id="refresh-metrics-btn" class="btn btn-ghost btn-sm" title="Refresh metrics">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+          </div>
+
+          <!-- Metric cards: primary stats -->
+          <div class="metrics-grid" id="metrics-grid">
+            <!-- Skeleton state -->
+            <div class="metric-card skeleton-card" id="metric-skeleton-1"><div class="skeleton-shimmer"></div></div>
+            <div class="metric-card skeleton-card" id="metric-skeleton-2"><div class="skeleton-shimmer"></div></div>
+            <div class="metric-card skeleton-card" id="metric-skeleton-3"><div class="skeleton-shimmer"></div></div>
+            <div class="metric-card skeleton-card" id="metric-skeleton-4"><div class="skeleton-shimmer"></div></div>
+            <div class="metric-card skeleton-card" id="metric-skeleton-5"><div class="skeleton-shimmer"></div></div>
+            <div class="metric-card skeleton-card" id="metric-skeleton-6"><div class="skeleton-shimmer"></div></div>
+          </div>
+
+          <!-- Info cards below grid -->
+          <div class="info-cards-row">
+            <div class="info-card" id="info-last-refresh">
+              <div class="info-card-left">
+                <span class="info-dot" id="refresh-dot"></span>
+                <div>
+                  <div class="info-card-label">Last Data Refresh</div>
+                  <div class="info-card-value" id="last-refresh-value">—</div>
+                </div>
+              </div>
+              <i class="fa-solid fa-clock-rotate-left info-card-icon"></i>
+            </div>
+            <div class="info-card" id="info-last-trained">
+              <div class="info-card-left">
+                <span class="info-dot info-dot-neutral" id="trained-dot"></span>
+                <div>
+                  <div class="info-card-label">Model Last Trained</div>
+                  <div class="info-card-value" id="last-trained-value">—</div>
+                </div>
+              </div>
+              <i class="fa-solid fa-brain info-card-icon"></i>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---- SECTION 2: DATA REFRESH ---- -->
+        <section class="dash-section">
+          <div class="op-card">
+            <div class="op-card-header">
+              <div>
+                <h2 class="op-card-title">Data Refresh</h2>
+                <p class="op-card-subtitle">Update stock prices from Yahoo Finance</p>
+              </div>
+              <button id="refresh-data-btn" class="btn btn-primary">
+                <i class="fa-solid fa-rotate"></i>
+                Refresh Now
+              </button>
+            </div>
+
+            <div id="refresh-progress-area" class="progress-area hidden">
+              <div class="progress-track">
+                <div class="progress-fill" id="refresh-progress-fill" style="width: 0%"></div>
+              </div>
+              <div class="progress-meta">
+                <span class="progress-message" id="refresh-progress-message">Starting…</span>
+                <span class="progress-pct" id="refresh-progress-pct">0%</span>
+              </div>
+            </div>
+
+            <div id="refresh-result" class="op-result hidden"></div>
+          </div>
+        </section>
+
+        <!-- ---- SECTION 3: MODEL RETRAINING ---- -->
+        <section class="dash-section">
+          <div class="op-card">
+            <div class="op-card-header">
+              <div>
+                <h2 class="op-card-title">Retrain AI Model</h2>
+                <p class="op-card-subtitle">Retrain the XGBoost stock prediction model on latest data</p>
+              </div>
+              <button id="retrain-btn" class="btn btn-warning">
+                <i class="fa-solid fa-microchip"></i>
+                Start Retraining
+              </button>
+            </div>
+
+            <div class="warning-banner">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>This process may take several minutes. Do not close this page.</span>
+            </div>
+
+            <div id="retrain-progress-area" class="progress-area hidden">
+              <div class="progress-track">
+                <div class="progress-fill progress-fill-warning" id="retrain-progress-fill" style="width: 0%"></div>
+              </div>
+              <div class="progress-meta">
+                <span class="progress-message" id="retrain-progress-message">Starting…</span>
+                <span class="progress-pct" id="retrain-progress-pct">0%</span>
+              </div>
+            </div>
+
+            <div id="retrain-result" class="op-result hidden"></div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ============================================================
+       GLOBAL LOADING OVERLAY (initial page load)
+  ============================================================ -->
+  <div id="global-loader" class="global-loader">
+    <i class="fa-solid fa-circle-notch fa-spin loader-spin"></i>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

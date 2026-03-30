@@ -1,0 +1,26 @@
+2025-07-28 00:19:18,630 - __main__ - INFO - ==================================================
+2025-07-28 00:19:18,631 - __main__ - INFO - STARTING IMPORT AND FUNCTIONALITY TESTS
+2025-07-28 00:19:18,631 - __main__ - INFO - ==================================================
+2025-07-28 00:19:18,631 - __main__ - INFO - Testing imports...
+2025-07-28 00:19:18,897 - __main__ - INFO - ✓ pandas and numpy imported successfully
+2025-07-28 00:19:18,898 - __main__ - INFO - ✓ config imported successfully
+2025-07-28 00:19:19,472 - __main__ - INFO - ✓ incremental_data_collector imported successfully
+2025-07-28 00:19:19,967 - __main__ - INFO - ✓ feature_engineering imported successfully
+2025-07-28 00:19:20,285 - __main__ - INFO - ✓ enhanced_model imported successfully
+2025-07-28 00:19:20,285 - __main__ - INFO - ✓ sklearn and xgboost imported successfully
+2025-07-28 00:19:20,285 - __main__ - INFO - All imports successful!
+2025-07-28 00:19:20,285 - __main__ - INFO - Testing basic functionality...
+2025-07-28 00:19:20,285 - __main__ - INFO - Base directory: C:\Users\kevil\OneDrive\Documents\Fish Code\PersonalFinanceApp\StockPredictionModel
+2025-07-28 00:19:20,417 - incremental_data_collector - INFO - Loaded 38315 proxies
+2025-07-28 00:19:20,440 - incremental_data_collector - INFO - Database connection established
+2025-07-28 00:19:20,440 - __main__ - INFO - ✓ Data collector initialized successfully
+2025-07-28 00:19:20,440 - __main__ - INFO - ✓ Feature engineer initialized successfully
+2025-07-28 00:19:20,542 - incremental_data_collector - INFO - Loaded 38315 proxies
+2025-07-28 00:19:20,560 - incremental_data_collector - INFO - Database connection established
+2025-07-28 00:19:21,893 - enhanced_model - INFO - CUDA GPU acceleration is available: NVIDIA GeForce RTX 4080
+2025-07-28 00:19:21,893 - __main__ - INFO - ✓ Model trainer initialized successfully
+2025-07-28 00:19:21,893 - __main__ - INFO - All basic functionality tests passed!
+2025-07-28 00:19:21,898 - __main__ - INFO - All tests passed! Ready to run retraining.
+2025-07-28 00:19:21,899 - __main__ - INFO - ==================================================
+2025-07-28 00:19:21,899 - __main__ - INFO - TESTS COMPLETED
+2025-07-28 00:19:21,899 - __main__ - INFO - ==================================================

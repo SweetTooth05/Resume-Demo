@@ -1,0 +1,4 @@
+test
+"{'accuracy': 0.6211457883166419, 'f1_score': 0.580652777293356, 'classification_report': {'HOLD': {'precision': 0.6426449250328198, 'recall': 0.857408875532366, 'f1-score': 0.7346529335566017, 'support': 162717.0}, 'BUY': {'precision': 0.5260955646725043, 'recall': 0.24934218163525906, 'f1-score': 0.3383322941620451, 'support': 103372.0}, 'SELL': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 16.0}, 'accuracy': 0.6211457883166419, 'macro avg': {'precision': 0.38958016323510797, 'recall': 0.36891701905587504, 'f1-score': 0.35766174257288225, 'support': 266105.0}, 'weighted avg': {'precision': 0.5973311473962963, 'recall': 0.6211457883166419, 'f1-score': 0.580652777293356, 'support': 266105.0}}, 'confusion_matrix': array([[139515,  23202,      0],
+       [ 77580,  25775,     17],
+       [     0,     16,      0]])}"

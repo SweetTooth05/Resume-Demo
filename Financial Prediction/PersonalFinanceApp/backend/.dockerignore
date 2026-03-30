@@ -1,0 +1,33 @@
+# Virtual environment - not needed in image (deps installed in Dockerfile)
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# IDE and env
+.env
+.env.*
+.idea/
+.vscode/
+*.swp
+*.log
+
+# Git
+.git/
+.gitignore
+
+# Tests and local
+.pytest_cache/
+.coverage
+htmlcov/
+*.log

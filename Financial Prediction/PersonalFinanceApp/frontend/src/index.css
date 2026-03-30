@@ -1,0 +1,400 @@
+/* ============================================================
+   FinTrack — Design System
+   Refined Editorial Finance aesthetic
+   ============================================================ */
+
+/* --- Design tokens ---------------------------------------- */
+:root {
+  /* Navy palette */
+  --color-navy-950: oklch(22% 0.06 255);
+  --color-navy-900: oklch(27% 0.07 255);
+  --color-navy-700: oklch(36% 0.07 255);
+  --color-navy-500: oklch(48% 0.07 255);
+  --color-navy-200: oklch(88% 0.025 255);
+
+  /* Copper accent */
+  --color-copper-700: oklch(42% 0.09 50);
+  --color-copper-600: oklch(50% 0.11 50);
+  --color-copper-400: oklch(62% 0.11 50);
+  --color-copper-200: oklch(85% 0.06 50);
+
+  /* Warm paper */
+  --color-paper-50:  oklch(99% 0.005 80);
+  --color-paper-100: oklch(97% 0.008 80);
+  --color-paper-200: oklch(93% 0.010 80);
+  --color-paper-300: oklch(89% 0.012 80);
+
+  /* Semantic text */
+  --color-text-primary:   oklch(22% 0.015 50);
+  --color-text-secondary: oklch(47% 0.015 50);
+  --color-text-tertiary:  oklch(62% 0.012 50);
+
+  /* Status */
+  --color-success: oklch(40% 0.11 160);
+  --color-error:   oklch(48% 0.13 25);
+  --color-warning: oklch(62% 0.11 50);
+
+  /* Spacing scale */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radius */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --radius-xl:  20px;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 4px oklch(27% 0.07 255 / 0.06);
+  --shadow-md:  0 4px 16px oklch(27% 0.07 255 / 0.08);
+  --shadow-lg:  0 12px 40px oklch(27% 0.07 255 / 0.12);
+}
+
+/* --- Reset ------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-paper-100);
+  color: var(--color-text-primary);
+  font-size: clamp(14px, 1vw + 0.5rem, 16px);
+  line-height: 1.6;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Typography -------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fraunces', Georgia, serif;
+  line-height: 1.2;
+  color: var(--color-navy-900);
+}
+
+/* --- Keyframes --------------------------------------------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    grid-template-rows: 0fr;
+  }
+  to {
+    opacity: 1;
+    grid-template-rows: 1fr;
+  }
+}
+
+@keyframes skeletonPulse {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* --- Page animation helpers -------------------------------- */
+.animate-fade-up {
+  animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-up-1 { animation-delay: 0ms;   }
+.animate-fade-up-2 { animation-delay: 60ms;  }
+.animate-fade-up-3 { animation-delay: 120ms; }
+.animate-fade-up-4 { animation-delay: 180ms; }
+.animate-fade-up-5 { animation-delay: 240ms; }
+
+/* --- Skeleton loading -------------------------------------- */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-paper-200) 25%,
+    var(--color-paper-300) 50%,
+    var(--color-paper-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* --- Scrollbar --------------------------------------------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper-200);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-paper-300);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(80% 0.01 80);
+}
+
+/* --- Focus ------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--color-copper-600);
+  outline-offset: 2px;
+}
+
+/* --- Stat strip -------------------------------------------- */
+.stat-strip {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid var(--color-paper-300);
+  border-radius: var(--radius-lg);
+  background: var(--color-paper-50);
+  overflow: hidden;
+}
+
+.stat-item {
+  flex: 1;
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.stat-item + .stat-item {
+  border-left: 1px solid var(--color-paper-300);
+}
+
+.stat-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.stat-value {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 600;
+  color: var(--color-navy-900);
+  line-height: 1;
+}
+
+/* --- Section labels ---------------------------------------- */
+.section-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-4);
+}
+
+/* --- Signal badges ----------------------------------------- */
+.signal-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.signal-badge--buy {
+  background: oklch(40% 0.11 160 / 0.12);
+  color: var(--color-success);
+}
+
+.signal-badge--sell {
+  background: oklch(48% 0.13 25 / 0.12);
+  color: var(--color-error);
+}
+
+.signal-badge--hold {
+  background: var(--color-paper-200);
+  color: var(--color-text-secondary);
+}
+
+/* --- Filter pills ------------------------------------------ */
+.filter-pills {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 20px;
+  border: 1px solid var(--color-paper-300);
+  background: var(--color-paper-50);
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.filter-pill:hover {
+  border-color: var(--color-navy-500);
+  color: var(--color-navy-900);
+}
+
+.filter-pill--active {
+  background: var(--color-navy-900);
+  border-color: var(--color-navy-900);
+  color: var(--color-paper-50);
+}
+
+.filter-pill--buy.filter-pill--active {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.filter-pill--sell.filter-pill--active {
+  background: var(--color-error);
+  border-color: var(--color-error);
+}
+
+/* --- Asset proportion bar ---------------------------------- */
+.asset-bar {
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  gap: 2px;
+  background: var(--color-paper-200);
+}
+
+.asset-bar-segment {
+  height: 100%;
+  transition: flex 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Inline form panel ------------------------------------- */
+.inline-form-panel {
+  display: grid;
+  transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.inline-form-panel--open {
+  grid-template-rows: 1fr;
+}
+
+.inline-form-panel--closed {
+  grid-template-rows: 0fr;
+}
+
+.inline-form-panel__inner {
+  overflow: hidden;
+}
+
+/* --- Responsive grid helpers ------------------------------- */
+.responsive-grid-2 {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(clamp(220px, 40vw, 380px), 1fr));
+}
+
+.responsive-grid-3 {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 30vw, 300px), 1fr));
+}
+
+.responsive-grid-4 {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(clamp(160px, 22vw, 240px), 1fr));
+}
+
+/* --- Responsive table -------------------------------------- */
+.responsive-table {
+  font-size: clamp(0.75rem, 1.4vw, 0.875rem);
+}
+
+.responsive-table th,
+.responsive-table td {
+  padding: clamp(6px, 1vw, 12px) clamp(8px, 1.5vw, 16px);
+}
+
+/* --- Media: mobile adjustments ----------------------------- */
+@media (max-width: 600px) {
+  .stat-strip {
+    flex-direction: column;
+  }
+
+  .stat-item + .stat-item {
+    border-left: none;
+    border-top: 1px solid var(--color-paper-300);
+  }
+
+  .responsive-grid-2,
+  .responsive-grid-3,
+  .responsive-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Recharts overrides ------------------------------------ */
+.recharts-wrapper {
+  width: 100% !important;
+}
+
+/* --- Media: sticky navbar on mobile ------------------------ */
+@media (max-width: 960px) {
+  .MuiAppBar-root {
+    position: sticky !important;
+    top: 0;
+    z-index: 100;
+  }
+}
+
+/* --- Images / media --------------------------------------- */
+img, video, canvas, svg, iframe {
+  display: block;
+  max-width: 100%;
+}
