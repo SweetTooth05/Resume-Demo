@@ -1,0 +1,52 @@
+[package]
+name = "finance-copilot"
+version = "0.1.0"
+description = "Local-first personal finance copilot"
+authors = ["Finance Copilot"]
+edition = "2021"
+
+[lib]
+name = "finance_copilot_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "finance-copilot"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-shell = "2"
+tauri-plugin-fs = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rusqlite = { version = "0.31", features = ["bundled"] }
+tokio = { version = "1", features = ["full"] }
+anyhow = "1"
+chrono = { version = "0.4", features = ["serde"] }
+reqwest = { version = "0.12", features = ["json", "rustls-tls", "blocking"], default-features = false }
+uuid = { version = "1", features = ["v4"] }
+thiserror = "1"
+log = "0.4"
+env_logger = "0.11"
+
+# Safe arithmetic evaluator — replaces broken hand-rolled parser
+evalexpr = "11"
+
+# Cross-platform system info (RAM, CPU) for hardware detection
+sysinfo = { version = "0.31", default-features = false, features = ["system"] }
+
+# OS credential vault (Windows Credential Manager / macOS Keychain / libsecret)
+keyring = "2"
+
+# Zero-on-drop for sensitive buffers (API keys, DB pages)
+zeroize = { version = "1", features = ["derive"] }
+
+[profile.release]
+opt-level = "s"
+strip = true
+lto = true
+codegen-units = 1
+panic = "abort"

@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import './styles/theme.css';
+@import "tailwindcss";
+
+* {
+  -webkit-user-drag: none;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+  border: none;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-positive, #12c97d) 28%, transparent);
+  color: var(--text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline-offset: 3px;
+}
+
+.skeleton-shimmer {
+  background: var(--skeleton-base);
+  background-image: var(--skeleton-shimmer);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
